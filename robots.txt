@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://qsensors.erdferkel.eu/sitemap.xml
