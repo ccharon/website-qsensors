@@ -26,7 +26,7 @@ jobs:
       - name: Prepare dist directory
         run: |
           mkdir dist
-          cp index.html style.css favicon.png qsensors.png qsensors-demo.webm robots.txt sitemap.xml dist/
+          cp index.html style.css favicon.png logo.svg qsensors-light.png qsensors-dark.png qsensors-demo-light.webm qsensors-demo-dark.webm robots.txt sitemap.xml dist/
 
       - name: Push to dist branch
         run: |
@@ -35,7 +35,7 @@ jobs:
           SHA=$(git rev-parse --short HEAD)
           git checkout --orphan dist-new
           git rm -rf . --cached
-          git add index.html style.css favicon.png qsensors.png qsensors-demo.webm robots.txt sitemap.xml
+          git add index.html style.css favicon.png logo.svg qsensors-light.png qsensors-dark.png qsensors-demo-light.webm qsensors-demo-dark.webm robots.txt sitemap.xml
           git commit -m "dist: build from $SHA"
           git push origin HEAD:dist --force
 
