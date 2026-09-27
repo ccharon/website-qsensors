@@ -1,5 +1,6 @@
 /* Colors follow the qsensors LCD: reflective green-tinted panel in light mode,
-   backlit green on a dark backplane in dark mode. */
+   backlit green on a dark backplane in dark mode. The page script always sets
+   data-theme (stored choice or system setting). */
 :root {
   color-scheme: light;
 
@@ -28,8 +29,9 @@
   --dark-display: none;
 }
 
+/* Without JavaScript no data-theme is set; the system setting applies directly. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme]) {
     color-scheme: dark;
 
     --bg-top: #1a1f1a;
@@ -90,13 +92,19 @@
   box-sizing: border-box;
 }
 
+/* Background on html without "fixed": iOS Safari does not repaint fixed
+   backgrounds reliably when the colors change. */
+html {
+  min-height: 100%;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+}
+
 body {
   margin: 0;
   min-height: 100vh;
 
   font-family: "Noto Sans", "Segoe UI", system-ui, sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%) fixed;
 
   display: flex;
   justify-content: center;
@@ -165,6 +173,7 @@ body {
 
 .theme-toggle {
   display: grid;
+  touch-action: manipulation;
   place-items: center;
 
   width: 40px;
@@ -377,7 +386,7 @@ footer {
 
 .preview-video,
 .preview-still {
-  width: min(517px, 100%);
+  width: min(516px, 100%);
   height: auto;
 
   border: 1px solid var(--border);

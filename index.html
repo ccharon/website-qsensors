@@ -26,14 +26,16 @@
 
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Applies a stored light/dark choice before first paint; without one the system setting applies. -->
+  <!-- Sets the design before first paint: the stored choice, otherwise the system setting. -->
   <script>
-    try {
-      const stored = localStorage.getItem("qsensors-theme");
-      if (stored === "light" || stored === "dark") {
-        document.documentElement.dataset.theme = stored;
-      }
-    } catch (e) {}
+    (function () {
+      let stored = null;
+      try {
+        stored = localStorage.getItem("qsensors-theme");
+      } catch (e) {}
+      const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = stored === "light" || stored === "dark" ? stored : system;
+    })();
   </script>
 
   <link rel="stylesheet" href="style.css">
@@ -174,10 +176,15 @@
 
   <aside class="preview-panel" aria-label="qsensors application preview">
     <div class="preview-frame">
-      <video class="preview-video theme-light" autoplay muted loop playsinline preload="metadata" width="517" height="1088">
+      <!-- MP4 first: iOS Safari plays H.264 everywhere, WebM only on recent versions. -->
+      <video class="preview-video theme-light" autoplay muted loop playsinline preload="metadata"
+             poster="qsensors-poster-light.jpg" width="516" height="1088">
+        <source src="qsensors-demo-light.mp4" type="video/mp4">
         <source src="qsensors-demo-light.webm" type="video/webm">
       </video>
-      <video class="preview-video theme-dark" muted loop playsinline preload="metadata" width="517" height="1088">
+      <video class="preview-video theme-dark" autoplay muted loop playsinline preload="metadata"
+             poster="qsensors-poster-dark.jpg" width="516" height="1088">
+        <source src="qsensors-demo-dark.mp4" type="video/mp4">
         <source src="qsensors-demo-dark.webm" type="video/webm">
       </video>
       <img class="preview-still theme-light" src="qsensors-light.png" width="557" height="1128" alt="qsensors main window, light design">
@@ -192,17 +199,25 @@
     const root = document.documentElement;
     const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const themeColors = { light: "#dfe9d6", dark: "#161a16" };
 
-    function effectiveTheme() {
-      return root.dataset.theme || (systemDark.matches ? "dark" : "light");
+    function storedTheme() {
+      try {
+        const stored = localStorage.getItem("qsensors-theme");
+        return stored === "light" || stored === "dark" ? stored : null;
+      } catch (e) {
+        return null;
+      }
     }
 
-    // Only the video matching the current design plays; the other one stays paused.
-    function syncVideos() {
-      const theme = effectiveTheme();
+    // Applies a design: CSS, browser toolbar color and the matching video.
+    function applyTheme(theme) {
+      root.dataset.theme = theme;
+      document.querySelectorAll('meta[name="theme-color"]').forEach(function (meta) {
+        meta.setAttribute("content", themeColors[theme]);
+      });
       document.querySelectorAll(".preview-video").forEach(function (video) {
-        const active = video.classList.contains("theme-" + theme) && !reducedMotion.matches;
-        if (active) {
+        if (video.classList.contains("theme-" + theme) && !reducedMotion.matches) {
           video.play().catch(function () {});
         } else {
           video.pause();
@@ -211,17 +226,23 @@
     }
 
     document.querySelector(".theme-toggle").addEventListener("click", function () {
-      const next = effectiveTheme() === "dark" ? "light" : "dark";
-      root.dataset.theme = next;
+      const next = root.dataset.theme === "dark" ? "light" : "dark";
       try {
         localStorage.setItem("qsensors-theme", next);
       } catch (e) {}
-      syncVideos();
+      applyTheme(next);
     });
 
-    systemDark.addEventListener("change", syncVideos);
-    reducedMotion.addEventListener("change", syncVideos);
-    syncVideos();
+    // The system setting applies until the visitor picks a design.
+    systemDark.addEventListener("change", function () {
+      if (!storedTheme()) {
+        applyTheme(systemDark.matches ? "dark" : "light");
+      }
+    });
+    reducedMotion.addEventListener("change", function () {
+      applyTheme(root.dataset.theme);
+    });
+    applyTheme(root.dataset.theme);
   })();
 </script>
 
