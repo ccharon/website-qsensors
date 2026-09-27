@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-site-verification" content="JWAGT6AcxEOeNq9G7ijYYIPHUFrn9tWcO21TAFXXoSA" />
+
+  <title>qsensors - Modern xsensors Alternative for Linux</title>
+
+  <meta name="description"
+        content="qsensors is a Qt-based Linux hardware monitor and a modern alternative to xsensors using lm-sensors to display temperatures, fan speeds, voltages, currents and power.">
+
+  <meta name="robots" content="index,follow">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#dfe9d6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161a16" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://qsensors.erdferkel.eu/">
+  <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.png" type="image/png">
+
+  <meta property="og:title" content="qsensors - Modern xsensors Alternative for Linux">
+  <meta property="og:description" content="Qt-based Linux sensor monitor inspired by xsensors.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qsensors.erdferkel.eu/">
+  <meta property="og:image" content="https://qsensors.erdferkel.eu/qsensors-light.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- External file: the server's Content-Security-Policy blocks inline scripts. Loaded
+       synchronously so the design is set before first paint. -->
+  <script src="theme.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "qsensors",
+    "applicationCategory": "SystemApplication",
+    "operatingSystem": "Linux",
+    "softwareVersion": "0.80.10",
+    "description": "Qt-based Linux hardware monitor and modern alternative to xsensors using lm-sensors.",
+    "url": "https://qsensors.erdferkel.eu/",
+    "author": {
+      "@type": "Person",
+      "name": "Christian Charon"
+    },
+    "programmingLanguage": "C++",
+    "keywords": [
+      "qsensors",
+      "xsensors",
+      "xsensors alternative",
+      "lm-sensors",
+      "Linux hardware monitor",
+      "Qt sensor monitor",
+      "temperature monitor",
+      "fan speed monitor"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+<div class="page">
+
+  <main class="content">
+
+    <header class="hero">
+      <div class="topbar">
+        <p class="eyebrow">
+          <a href="https://kernel.org" target="_blank" rel="noopener noreferrer">Linux</a>
+          ·
+          <a href="https://www.qt.io/development/qt-framework" target="_blank" rel="noopener noreferrer">Qt</a>
+          ·
+          <a href="https://github.com/lm-sensors/lm-sensors" target="_blank" rel="noopener noreferrer">lm-sensors</a>
+        </p>
+
+        <button class="theme-toggle" type="button" aria-label="Switch between light and dark design" title="Light / dark">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5"/>
+            <path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="title">
+        <img class="logo" src="logo.svg" width="72" height="72" alt="">
+        <h1>qsensors</h1>
+      </div>
+
+      <p class="lead">
+        qsensors is a lightweight Qt-based Linux hardware monitoring application
+        using lm-sensors, inspired by the classic xsensors.
+      </p>
+
+      <div class="actions full">
+        <a class="button primary" href="https://github.com/ccharon/qsensors" target="_blank" rel="noopener noreferrer">
+          Source Code
+        </a>
+
+        <a class="button secondary" href="https://github.com/ccharon/qsensors/tree/main/gentoo" target="_blank" rel="noopener noreferrer">
+          Gentoo Ebuild
+        </a>
+      </div>
+    </header>
+
+    <section id="installation">
+      <h2>Try qsensors 0.80.10</h2>
+
+      <p>
+        The easiest way to try qsensors is the portable Linux AppImage build for x86_64 or arm64.
+        No installation is required. The git repository also contains a Gentoo Ebuild and generic build instructions.
+      </p>
+
+      <div class="actions">
+        <a
+          class="button primary"
+          href="https://github.com/ccharon/qsensors/releases/download/v0.80.10/qsensors-0.80.10-x86_64.AppImage"
+          target="_blank"
+          rel="noopener noreferrer">
+          AppImage x86_64
+        </a>
+
+        <a
+          class="button secondary"
+          href="https://github.com/ccharon/qsensors/releases/download/v0.80.10/qsensors-0.80.10-aarch64.AppImage"
+          target="_blank"
+          rel="noopener noreferrer">
+          AppImage arm64
+        </a>
+      </div>
+
+      <p class="note">
+        x86_64 runs on distributions with glibc 2.28 or newer, arm64 needs glibc 2.39.
+        Both run natively on Wayland and on X11.
+      </p>
+    </section>
+
+    <section id="about">
+      <h2>About qsensors</h2>
+      <p class="section-lead">modern alternative to xsensors</p>
+
+      <dl class="about-list">
+        <dt>Monitoring</dt>
+        <dd>CPU temperatures, motherboard sensors, fan speeds, voltages, currents and power.</dd>
+
+        <dt>Units</dt>
+        <dd>Temperature display in Celsius and Fahrenheit; small currents and power in mA and mW.</dd>
+
+        <dt>Configuration</dt>
+        <dd>Uses labels, names and values from lm-sensors, including <code>/etc/sensors3.conf</code> and <code>/etc/sensors.d/</code>.</dd>
+
+        <dt>Languages</dt>
+        <dd>English, German, Spanish, French and Portuguese.</dd>
+
+        <dt>License</dt>
+        <dd>GPL-2.0-or-later</dd>
+      </dl>
+    </section>
+
+    <footer>Christian Charon © 2026</footer>
+  </main>
+
+  <aside class="preview-panel" aria-label="qsensors application preview">
+    <div class="preview-frame">
+      <!-- MP4 first: iOS Safari plays H.264 everywhere, WebM only on recent versions. -->
+      <video class="preview-video theme-light" autoplay muted loop playsinline preload="metadata"
+             poster="qsensors-poster-light.jpg" width="516" height="1088">
+        <source src="qsensors-demo-light.mp4" type="video/mp4">
+        <source src="qsensors-demo-light.webm" type="video/webm">
+      </video>
+      <video class="preview-video theme-dark" autoplay muted loop playsinline preload="metadata"
+             poster="qsensors-poster-dark.jpg" width="516" height="1088">
+        <source src="qsensors-demo-dark.mp4" type="video/mp4">
+        <source src="qsensors-demo-dark.webm" type="video/webm">
+      </video>
+      <img class="preview-still theme-light" src="qsensors-light.png" width="557" height="1128" alt="qsensors main window, light design">
+      <img class="preview-still theme-dark" src="qsensors-dark.png" width="557" height="1128" alt="qsensors main window, dark design">
+    </div>
+  </aside>
+
+</div>
+
+</body>
+</html>
